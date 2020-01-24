@@ -1,0 +1,34 @@
+def solution(S):
+    if len(S) % 2 == 1:   return 0
+    matched = {"]":"[", "}":"{", ")": "("}
+    to_push = ["[", "{", "("]
+    stack = []
+    for element in S:
+        if element in to_push:
+            stack.append(element)
+        else:
+            if len(stack) == 0:
+                return 0
+            elif matched[element] != stack.pop():
+                return 0
+    if len(stack) == 0:
+        return 1
+    else:
+        return 0
+
+
+def solution(S):
+    if len(S) % 2 == 1:
+        return 0
+    active = []
+    openers = ["(","[","{"]
+    closers = [")","]","}"]
+    for e in S:
+        if e in openers:
+            active.append(closers[openers.index(e)])
+        elif len(active) == 0 or active.pop() != e:
+            return 0
+    if len(active) == 0:
+        return 1
+    else:
+        return 0
